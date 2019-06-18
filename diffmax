@@ -1,0 +1,56 @@
+#!/bin/sh
+# use as:
+# diffmax -m cataRT-0.4cc1/cataRT-0.4cc.pat cataRT-0.4d/cataRT-0.4d.pat | grep -v connect | less
+# $Log: diffmax,v $
+# Revision 1.6  2015/02/05 11:44:49  schwarz
+# damn, | doesn't work in a string
+#
+# Revision 1.5  2014/03/28 16:34:55  schwarz
+# 22.11.2010: json-sort, eat -L and arg
+#
+# Revision 1.4  2010/10/18 15:05:51  schwarz
+# change for max5
+#
+# Revision 1.3  2007/11/27 13:27:37  schwarz
+# help
+# pass options to diff
+
+#echo $0: $* EOA
+
+#if [ ( $# -eq 0 )  -o  ( $1 = -h ) ]; then
+if [ $# -eq 0 ]; then
+    echo "usage:   diffmax [-m] [diff-opts] patch1.maxpat patch2.maxpat"
+    echo "options: -m	munge: remove layout changes"
+    echo "         all further options are passed to diff(1)"
+    exit;
+fi
+
+if [ $1 = -m ]; then
+    # remove changes in position
+#    munge="perl -n $HOME/bin/diffmaxmunge.pl"
+    munge="json-sort.pl -"
+    munge2="perl -n $HOME/bin/diffmaxmunge.pl -"
+    shift;
+else
+    munge="json-sort.pl -"
+    munge2="cat"
+fi
+
+echo $0: munge is $munge \| $munge2
+
+while [ $1 = -L ]; do
+    shift; shift;	# svn label arg
+done
+
+
+ta="/tmp/diffmax.$$.a. "`basename $1`
+tb="/tmp/diffmax.$$.b. "`basename $2`
+
+# echo 1 $1 2 $2 a $ta b $tb
+
+cat "$1" | tr \\r \\n | $munge | $munge2 >"$ta"
+cat "$2" | tr \\r \\n | $munge | $munge2 >"$tb"
+
+shift; shift
+diff -w $* "$ta" "$tb"
+
