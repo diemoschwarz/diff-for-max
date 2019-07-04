@@ -20,7 +20,7 @@ Of course this also does not make it possible to merge two files. It is still in
 
 ```
 [diff "max"]
-  textconv = /Users/schwarz/bin/diffmaxmunge.pl
+  textconv = <absolute executable path>/diffmaxmunge.pl
 ```
   
 - in local ``.gitattributes``, add
