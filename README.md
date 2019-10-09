@@ -1,5 +1,5 @@
 # diff-for-max
-Attempts to improve the usabaility of version control for [Cycling74](https://cycling74.com/) Max patch files by filtering the diff output to leave only the semantically meaningful parts.
+Attempts to improve the usability of version control for [Cycling74](https://cycling74.com/) Max patch files by filtering the diff output to leave only the semantically meaningful parts.
 
 ## Description
 
@@ -12,7 +12,7 @@ The shell command ``diffmax -m <file1> <file2>`` can be used as a replacement fo
 
 This is a ridiculously brute force attempt to get a human-readable idea of what changed in a patch. _It is not even parsing the json!_ I put this up to provoke a proper solution...
 
-Of course this also does not make it possible to merge two files. It is still inevitable to do this by hand in Max, but at least, one can now see quickly what changed semantically. (However, we can't know in which subpatch, because of the stupidity of this approach, the filtered diff output has lost the subpatch heararchy.)
+Of course this also does not make it possible to merge two files. It is still inevitable to do this by hand in Max, but at least, one can now see quickly what changed semantically. (However, we can't know in which subpatch, because of the stupidity of this approach, the filtered diff output has lost the subpatch hierarchy.)
 
 ## Interfacing with git
 
@@ -29,4 +29,13 @@ Of course this also does not make it possible to merge two files. It is still in
 *.maxpat diff=max
 *.maxhelp diff=max
 *.amxd -text diff=max
+```
+
+- one line:
+```
+cat >>.gitattributes <<END
+*.maxpat diff=max
+*.maxhelp diff=max
+*.amxd -text diff=max
+END
 ```
