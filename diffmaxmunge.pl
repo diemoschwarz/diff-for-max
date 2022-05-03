@@ -58,7 +58,8 @@ BEGIN
 		  \w*toolbar\w* grid\w* parameter_\w* index visible
 		  color textcolor textcolor_inverse bgcolor bgmode selectioncolor elementcolor border 
 		  clickthrough enablehscroll enablevscroll lockeddragscroll
-		  id patchline patchlinecolor order destination source obj-\d+)); # new in max8
+		  id patchline patchlinecolor order destination source obj-\d+), # new in max8
+	       qw(angle autogradient saved_object_attributes attr_comment)); # new in max8.3
 
     # build filter that matches "keyword" or decimal values arrays on separate lines 
     $filter = '^\s*("(' . join('|', @keys) . ')"|\d+\.?\d*,?|[\]\{\}],?)';
