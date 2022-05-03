@@ -56,6 +56,7 @@ BEGIN
 		  numinlets numoutlets box outlettype bang int float presentation
 		  modernui bglocked bottomtoolbarpinned boxanimatetime boxes style parentstyle
 		  \w*toolbar\w* grid\w* parameter_\w* index visible
+		  verbose lockedsize assistshowspatchername
 		  \w*color textcolor_inverse bgmode border 
 		  clickthrough enablehscroll enablevscroll lockeddragscroll
 		  id patchline patchlinecolor order destination source obj-\d+), # new in max8
